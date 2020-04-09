@@ -27,7 +27,6 @@ def sobel_mag_thresh(img, sobel_kernel = '3', thresh = (0,255)):
     sobely = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize = sobel_kernel)
     mag_sobelxy = np.sqrt(sobelx**2 + sobely**2)
     mag_sobelxy = 255 * mag_sobelxy / np.max(mag_sobelxy)
-    # mask = (mag_sobelxy >= thresh[0]) & (mag_sobelxy <= thresh[1])
     mask = cv2.inRange(mag_sobelxy, thresh[0], thresh[1])
 
     return mask
@@ -39,9 +38,8 @@ def sobel_dir_thresh(img, sobel_kernel = '3', thresh = (0, np.pi / 2)):
     abs_sobelx = np.absolute(sobelx)
     abs_sobely = np.absolute(sobely)
     grad_sobel = np.arctan2(abs_sobely, abs_sobelx)
-    # mask = (grad_sobel >= thresh[0]) & (grad_sobel <= thresh[1])
     mask = cv2.inRange(grad_sobel, thresh[0], thresh[1])
-
+    
     return mask
 
 k_size = 3
